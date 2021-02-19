@@ -1,0 +1,34 @@
+@import '../base/abstracts';
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  .nav {
+    height: 50px;
+    width: 75%;
+    padding: 10px;
+    background: $black;
+    color: $white;
+    display: flex;
+    align-items: center;
+
+    ul {
+      display: flex;
+      list-style: none;
+      flex: 1;
+      justify-content: space-around;
+
+      li {
+        display: flex;
+        font-size: 0.75rem;
+      }
+    }
+
+    .categories {
+      ul {
+        display: none;
+      }
+    }
+  }
+}
