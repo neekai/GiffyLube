@@ -5,7 +5,7 @@
   justify-content: center;
 
   .nav {
-    height: 50px;
+    height: 35px;
     width: 75%;
     padding: 10px;
     background: $black;
@@ -22,12 +22,46 @@
       li {
         display: flex;
         font-size: 0.75rem;
+        cursor: pointer;
       }
     }
 
-    .categories {
-      ul {
+    .category {
+      position: relative;
+      .category-dropdown {
         display: none;
+      }
+      &:hover {
+        .category-dropdown {
+          display: grid;
+          grid-template-columns: 50% 50%;
+          row-gap: 15px;
+          background: purple;
+          border-top: 10px solid black;
+          position: absolute;
+          top: 100%;
+          left: -40%;
+          width: 550px;
+          padding: 1.5rem;
+        }
+      }
+    }
+    //refactor to have a dropdown class that determines the common stuff between rating and category
+    .rating {
+      position: relative;
+      .rating-dropdown {
+        display: none;
+      }
+      &:hover {
+        .rating-dropdown {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          background: purple;
+          border-top: 10px solid black;
+          top: 100%;
+          padding: 1.5rem;
+        }
       }
     }
   }

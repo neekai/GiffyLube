@@ -1,9 +1,10 @@
-import { createContext, useState, useReducer } from 'react'
-import { SET_CATEGORY, SET_RATING } from 'react'
+import { createContext, useReducer } from 'react'
+import { SET_CATEGORY, SET_RATING } from '../utils/actions'
 
 const initialState = { category: 'trending', rating: '' }
 
 const reducer = (state, { type, payload }) => {
+  console.log('type', type, 'payload', payload)
   switch (type) {
     case SET_CATEGORY:
       return {
