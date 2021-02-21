@@ -43,24 +43,7 @@
           left: -40%;
           width: 550px;
           padding: 1.5rem;
-        }
-      }
-    }
-    //refactor to have a dropdown class that determines the common stuff between rating and category
-    .rating {
-      position: relative;
-      .rating-dropdown {
-        display: none;
-      }
-      &:hover {
-        .rating-dropdown {
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          background: purple;
-          border-top: 10px solid black;
-          top: 100%;
-          padding: 1.5rem;
+          z-index: 1;
         }
       }
     }

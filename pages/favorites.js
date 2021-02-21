@@ -1,7 +1,9 @@
+import Starred from '../components/Starred'
+
 const favorites = () => {
   return (
     <div>
-      <h1>Favorites</h1>
+      <Starred />
     </div>
   )
 }

@@ -9,17 +9,9 @@ const CATEGORIES = [
   { name: 'Decades', value: 'decades' }
 ]
 
-const RATINGS = [
-  { name: 'G', value: 'g' },
-  { name: 'PG', value: 'pg' },
-  { name: 'PG 13', value: 'pg13' },
-  { name: 'R', value: 'r' }
-]
-
 const MAX_OFFSET = 4999
 
 module.exports = {
   CATEGORIES,
-  MAX_OFFSET,
-  RATINGS
+  MAX_OFFSET
 }

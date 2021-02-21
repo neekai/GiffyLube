@@ -1,7 +1,7 @@
 import { createContext, useReducer } from 'react'
-import { SET_CATEGORY, SET_RATING } from '../utils/actions'
+import { SET_CATEGORY } from '../utils/actions'
 
-const initialState = { category: 'trending', rating: '' }
+const initialState = { category: 'trending' }
 
 const reducer = (state, { type, payload }) => {
   console.log('type', type, 'payload', payload)
@@ -10,11 +10,6 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         category: payload
-      }
-    case SET_RATING:
-      return {
-        ...state,
-        rating: payload
       }
     default:
       return state

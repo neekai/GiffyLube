@@ -1,23 +1,27 @@
 import { useEffect, useContext } from 'react'
 import Link from 'next/link'
-import { CATEGORIES, RATINGS } from '../utils/constants'
+import { CATEGORIES } from '../utils/constants'
 import { FilterContext } from '../contexts/FilterContext'
-import { SET_CATEGORY, SET_RATING } from '../utils/actions'
+import { SET_CATEGORY } from '../utils/actions'
 import navStyles from '../styles/components/Nav.module.scss'
 
 const Nav = () => {
   const {
-    filterState: { category: categoryName, rating },
+    filterState: { category: categoryName },
     setFilter
   } = useContext(FilterContext)
-  console.log('whats category', categoryName)
+
   return (
     <div className={navStyles.container}>
       <nav className={navStyles.nav}>
-        <section>Logo</section>
+        <Link href="/">Logo</Link>
         <ul>
-          <li>
-            <Link href="/">Trending</Link>
+          <li
+            onClick={() =>
+              setFilter({ type: SET_CATEGORY, payload: 'trending' })
+            }
+          >
+            <Link href="/trending">Trending</Link>
           </li>
           <li className={navStyles.category}>
             Categories
@@ -38,21 +42,6 @@ const Nav = () => {
                 </Link>
               ))}
             </div>
-          </li>
-          <li className={navStyles.rating}>
-            Rating
-            <ul className={navStyles['rating-dropdown']}>
-              {RATINGS.map((rating, i) => (
-                <li
-                  key={i}
-                  onClick={() =>
-                    setFilter({ type: SET_RATING, payload: rating.value })
-                  }
-                >
-                  {rating.name}
-                </li>
-              ))}
-            </ul>
           </li>
           <li>
             <Link href="/favorites">Favorites</Link>
