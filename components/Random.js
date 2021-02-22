@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import { DelayContext } from '../contexts/DelayContext'
 import { getRandomGIF } from '../services/gallery.js'
 import randomStyles from '../styles/components/Random.module.scss'
 import imageStyles from '../styles/components/Image.module.scss'
 
 const Random = ({ initialRandomGIF }) => {
+  const {
+    delayState: { delay }
+  } = useContext(DelayContext)
   const [randomGIF, setRandomGIF] = useState(initialRandomGIF)
   const [loading, setLoading] = useState(false)
   const [searchValue, setSearchValue] = useState('')
@@ -11,14 +15,13 @@ const Random = ({ initialRandomGIF }) => {
   const handleGetRandomGIF = async () => {
     setSearchValue('')
     setLoading(true)
-    const GIF = await getRandomGIF()
+    const GIF = await getRandomGIF(delay)
     setRandomGIF(GIF)
     setLoading(false)
   }
 
   const handleSearchValue = e => {
     const value = e.target.value.trim()
-    console.log('value', value)
     setSearchValue(value)
   }
 
@@ -26,11 +29,11 @@ const Random = ({ initialRandomGIF }) => {
     e.preventDefault()
     console.log('search value', searchValue)
     setLoading(true)
-    const GIF = await getRandomGIF(searchValue)
+    const GIF = await getRandomGIF(delay, searchValue)
     setRandomGIF(GIF)
     setLoading(false)
   }
-  console.log('random gif', randomGIF)
+
   return (
     <section className={randomStyles['container']}>
       <form className={randomStyles.search} onSubmit={handleSearchSubmit}>
@@ -54,7 +57,7 @@ const Random = ({ initialRandomGIF }) => {
           <h2>{randomGIF.title}</h2>
         </div>
       </div>
-      <button onClick={handleGetRandomGIF}>
+      <button onClick={handleGetRandomGIF} disabled={loading}>
         {loading ? 'loading' : 'Get Funky!'}
       </button>
     </section>

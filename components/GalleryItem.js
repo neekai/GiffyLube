@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { addToFavorite, removeFromFavorite } from '../utils/helpers'
+import { useRef, useCallback } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 import galleryItemStyles from '../styles/components/GalleryItem.module.scss'
 import imageStyles from '../styles/components/Image.module.scss'
 
@@ -16,7 +15,6 @@ const GalleryItem = ({
   toggleModal,
   setCurrentlySelectedGIF
 }) => {
-  const [saved, setSaved] = useState(false)
   const observer = useRef()
   const lastGIFElementRef = useCallback(
     node => {
@@ -39,35 +37,23 @@ const GalleryItem = ({
     toggleModal()
   }
 
-  const handleToggleStar = (slug, url) => {
-    if (saved) {
-      setSaved(false)
-      removeFromFavorite(slug)
-    } else {
-      setSaved(true)
-      addToFavorite(slug, url)
-    }
-  }
-
   const renderImage = () => {
     return (
       <>
-        <img
-          src={GIF.images.downsized_medium.url}
+        <LazyLoadImage
+          effect="blur"
+          src={GIF.images.original.url}
           alt={GIF.title}
-          className={galleryItemStyles.image}
+          wrapperClassName={galleryItemStyles.image}
+          height={GIF.images.original.height}
+          width={GIF.images.original.width}
         />
         <div className={imageStyles['image-details']}>
-          <FontAwesomeIcon icon={faStar} className={imageStyles.star} fill />
           <h2>{GIF.title}</h2>
         </div>
       </>
     )
   }
-
-  // useEffect(() => {
-  //   if (sessionStorage.getItem(slug)) setSaved(true)
-  // }, [])
 
   return gifCount === index + 1 ? (
     <div

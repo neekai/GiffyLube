@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { FilterContext } from '../contexts/FilterContext'
+import { DelayContext } from '../contexts/DelayContext'
 import useFilterSearch from '../utils/useFilterSearch.js'
 import Modal from './Modal'
 import GalleryItem from './GalleryItem'
@@ -12,7 +13,14 @@ const Gallery = () => {
   const {
     filterState: { category }
   } = useContext(FilterContext)
-  const { GIFs, hasMore, loading, error } = useFilterSearch(category, offset)
+  const {
+    delayState: { delay }
+  } = useContext(DelayContext)
+  const { GIFs, hasMore, loading, error } = useFilterSearch(
+    category,
+    offset,
+    delay
+  )
 
   const toggleModal = () => setDisplayModal(!displayModal)
 

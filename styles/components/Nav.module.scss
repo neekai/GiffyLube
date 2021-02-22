@@ -35,7 +35,7 @@
         .category-dropdown {
           display: grid;
           grid-template-columns: 50% 50%;
-          row-gap: 15px;
+          grid-row-gap: 15px;
           background: purple;
           border-top: 10px solid black;
           position: absolute;
@@ -43,6 +43,28 @@
           left: -40%;
           width: 550px;
           padding: 1.5rem;
+          z-index: 1;
+        }
+      }
+    }
+
+    .delay {
+      position: relative;
+      .delay-dropdown {
+        display: none;
+      }
+      &:hover {
+        .delay-dropdown {
+          display: grid;
+          grid-row-gap: 15px;
+          width: 100px;
+          flex-direction: column;
+          position: absolute;
+          background: purple;
+          border-top: 10px solid black;
+          top: 100%;
+          left: -40%;
+          padding: 1rem;
           z-index: 1;
         }
       }

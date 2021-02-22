@@ -4,7 +4,6 @@ import { SET_CATEGORY } from '../utils/actions'
 const initialState = { category: 'trending' }
 
 const reducer = (state, { type, payload }) => {
-  console.log('type', type, 'payload', payload)
   switch (type) {
     case SET_CATEGORY:
       return {

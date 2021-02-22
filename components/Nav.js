@@ -1,8 +1,9 @@
 import { useEffect, useContext } from 'react'
 import Link from 'next/link'
-import { CATEGORIES } from '../utils/constants'
+import { CATEGORIES, DELAY_VALUES } from '../utils/constants'
 import { FilterContext } from '../contexts/FilterContext'
-import { SET_CATEGORY } from '../utils/actions'
+import { DelayContext } from '../contexts/DelayContext'
+import { SET_CATEGORY, SET_DELAY } from '../utils/actions'
 import navStyles from '../styles/components/Nav.module.scss'
 
 const Nav = () => {
@@ -10,6 +11,8 @@ const Nav = () => {
     filterState: { category: categoryName },
     setFilter
   } = useContext(FilterContext)
+
+  const { setDelay } = useContext(DelayContext)
 
   return (
     <div className={navStyles.container}>
@@ -46,7 +49,21 @@ const Nav = () => {
           <li>
             <Link href="/favorites">Favorites</Link>
           </li>
-          <li>Delay</li>
+          <li className={navStyles.delay}>
+            Delay
+            <div className={navStyles['delay-dropdown']}>
+              {DELAY_VALUES.map((delay, i) => (
+                <div
+                  key={i}
+                  onClick={() => {
+                    setDelay({ type: SET_DELAY, payload: delay.value })
+                  }}
+                >
+                  {delay.name}
+                </div>
+              ))}
+            </div>
+          </li>
         </ul>
       </nav>
     </div>
