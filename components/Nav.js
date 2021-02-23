@@ -20,7 +20,9 @@ const Nav = () => {
     <div className={navStyles.container}>
       <nav className={navStyles.nav}>
         <Link href="/">
-          <FontAwesomeIcon icon={faRocket} className={navStyles.logo} />
+          <li>
+            <FontAwesomeIcon icon={faRocket} className={navStyles.logo} />
+          </li>
         </Link>
         <ul>
           <li
@@ -29,35 +31,6 @@ const Nav = () => {
             }
           >
             <Link href="/trending">Trending</Link>
-          </li>
-          <li className={navStyles.category}>
-            Categories
-            <div
-              className={`${navStyles['dropdown']} ${
-                navStyles['category-dropdown']
-              }`}
-            >
-              {CATEGORIES.map((category, i) => (
-                <Link
-                  key={i}
-                  href="/category/[name]"
-                  as={`/category/${category.value}`}
-                >
-                  <div
-                    onClick={() =>
-                      setFilter({ type: SET_CATEGORY, payload: category.value })
-                    }
-                    className={navStyles['dropdown-item']}
-                  >
-                    {category.name}
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <FontAwesomeIcon
-              icon={faCaretDown}
-              className={navStyles['carrot']}
-            />
           </li>
           <li>
             <Link href="/favorites">Favorites</Link>

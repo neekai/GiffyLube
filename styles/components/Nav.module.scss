@@ -15,10 +15,10 @@
     color: $white;
     display: flex;
     align-items: center;
+    list-style: none;
 
     ul {
       display: flex;
-      list-style: none;
       flex: 1;
       justify-content: space-around;
       align-items: center;
@@ -62,23 +62,6 @@
         }
         &:hover {
           color: $vice-blue;
-        }
-      }
-    }
-
-    .category {
-      position: relative;
-      .category-dropdown {
-        display: none;
-      }
-      &:hover {
-        .dropdown {
-          display: grid;
-          &.category-dropdown {
-            grid-template-columns: 50% 50%;
-            width: 550px;
-            padding: 1.5rem;
-          }
         }
       }
     }

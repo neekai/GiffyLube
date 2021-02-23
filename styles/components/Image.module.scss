@@ -49,4 +49,10 @@
       margin: auto;
     }
   }
+
+  @include responsive() {
+    img {
+      min-width: unset;
+    }
+  }
 }

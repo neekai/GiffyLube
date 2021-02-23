@@ -1,12 +1,8 @@
-import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imageStyles from '../styles/components/Image.module.scss'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 const starredItem = ({ starredGIF, handleUnstar }) => {
-  // useEffect(() => {
-  //   sessionStorage.clear()
-  // }, [])
   return (
     <div className={imageStyles['image-container']}>
       <img

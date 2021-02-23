@@ -27,6 +27,12 @@ p {
   color: #fff;
 }
 
+.loading,
+.error {
+  text-align: center;
+  padding: 15px;
+}
+
 .loading-icon {
-  color: #fff;
+  color: #41b6e6;
 }

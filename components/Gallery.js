@@ -25,7 +25,7 @@ const Gallery = () => {
     offset,
     delay
   )
-  console.log('loading', loading)
+
   const toggleModal = () => setDisplayModal(!displayModal)
 
   useEffect(() => {
@@ -58,7 +58,6 @@ const Gallery = () => {
               index={i}
               loading={loading}
               hasMore={hasMore}
-              offset={offset}
               setOffset={setOffset}
               toggleModal={toggleModal}
               setCurrentlySelectedGIF={setCurrentlySelectedGIF}
@@ -66,12 +65,17 @@ const Gallery = () => {
           ))}
         </Masonry>
       </ResponsiveMasonry>
-      <div>
+      <div className="loading">
         {loading && (
-          <FontAwesomeIcon icon={faSpinner} spin className="loading-icon" />
+          <FontAwesomeIcon
+            icon={faSpinner}
+            spin
+            className="loading-icon"
+            size="2x"
+          />
         )}
       </div>
-      <div>{error && <h1>Error</h1>}</div>
+      <div className="error">{error && <h1>Error</h1>}</div>
     </>
   )
 }

@@ -10,7 +10,6 @@ const GalleryItem = ({
   index,
   loading,
   hasMore,
-  offset,
   setOffset,
   toggleModal,
   setCurrentlySelectedGIF
