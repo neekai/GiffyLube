@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { MAX_OFFSET } from './constants'
 import { getTrendingGIFs, getGIFsByCategory } from '../services/gallery'
+import AbortController from 'abort-controller'
 
 const useFilterSearch = (category, offset = 0, delay = 0) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [GIFs, setGIFs] = useState([])
   const [hasMore, setHasMore] = useState(true)
-
-  // const controller = new AbortController();
-  // const { signal } = controller
+  const controller = new AbortController()
+  const { signal } = controller
 
   useEffect(() => {
     setGIFs([])
@@ -18,11 +18,10 @@ const useFilterSearch = (category, offset = 0, delay = 0) => {
   useEffect(() => {
     setLoading(true)
     setError(false)
-
     if (category === 'trending') {
-      getTrendingGIFs(offset, delay)
+      console.log('hello')
+      getTrendingGIFs(offset, delay, signal)
         .then(res => {
-          console.log('res', res)
           setGIFs(prevGIFs => {
             return [...prevGIFs, ...res]
           })
@@ -34,7 +33,7 @@ const useFilterSearch = (category, offset = 0, delay = 0) => {
           setError(true)
         })
     } else {
-      getGIFsByCategory(category, offset)
+      getGIFsByCategory(category, offset, delay, signal)
         .then(res => {
           setGIFs(prevGIFs => {
             return [...prevGIFs, ...res]
@@ -48,8 +47,8 @@ const useFilterSearch = (category, offset = 0, delay = 0) => {
         })
     }
 
-    // return () => controller.abort()
-  }, [category, offset, delay])
+    return () => controller.abort()
+  }, [offset, delay])
   return { loading, error, GIFs, hasMore }
 }
 

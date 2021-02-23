@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import Random from '../components/Random'
-import { getRandomGIF } from '../services/gallery.js'
+import Main from '../components/Main'
 
-const Home = ({ initialRandomGIF }) => {
+const Home = () => {
   return (
     <div>
       <Head>
@@ -13,19 +12,10 @@ const Home = ({ initialRandomGIF }) => {
         />
       </Head>
       <main>
-        <Random initialRandomGIF={initialRandomGIF} />
+        <Main />
       </main>
     </div>
   )
 }
 
 export default Home
-
-export const getStaticProps = async () => {
-  const initialRandomGIF = await getRandomGIF()
-  return {
-    props: {
-      initialRandomGIF
-    }
-  }
-}

@@ -21,10 +21,11 @@
   }
 
   .modal {
-    background-color: $transparent-black;
     color: $white;
     position: relative;
     padding: 2.5rem;
+    min-width: 300px;
+    max-width: 450px;
 
     .close {
       position: absolute;
@@ -37,7 +38,6 @@
     h2 {
       text-transform: capitalize;
       text-align: center;
-      margin-top: 1rem;
     }
   }
 }

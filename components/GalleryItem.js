@@ -22,12 +22,10 @@ const GalleryItem = ({
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log('last')
-          setOffset(offset + 20)
+          setOffset(prevOffset => prevOffset + 20)
         }
       })
       if (node) observer.current.observe(node)
-      console.log('node', node)
     },
     [loading, hasMore]
   )

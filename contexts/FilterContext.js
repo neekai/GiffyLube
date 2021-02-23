@@ -1,7 +1,7 @@
 import { createContext, useReducer } from 'react'
-import { SET_CATEGORY } from '../utils/actions'
+import { SET_CATEGORY, SET_SEARCH_VALUE } from '../utils/actions'
 
-const initialState = { category: 'trending' }
+const initialState = { category: 'trending', query: '' }
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -9,6 +9,12 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         category: payload
+      }
+
+    case SET_SEARCH_VALUE:
+      return {
+        ...state,
+        query: payload
       }
     default:
       return state

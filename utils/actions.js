@@ -1,2 +1,3 @@
 export const SET_CATEGORY = 'SET_CATEGORY'
+export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
 export const SET_DELAY = 'SET_DELAY'

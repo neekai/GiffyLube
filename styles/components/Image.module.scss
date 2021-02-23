@@ -11,7 +11,10 @@
 
   img {
     width: 100%;
+    min-height: 300px;
     max-height: 400px;
+    min-width: 300px;
+    max-width: 500px;
   }
 
   &:hover {
@@ -40,7 +43,7 @@
       cursor: pointer;
     }
     h2 {
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 1.2rem;
       align-self: center;
       margin: auto;

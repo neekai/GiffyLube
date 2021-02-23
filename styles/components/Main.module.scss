@@ -1,0 +1,33 @@
+@import '../base/abstracts';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+
+  .header {
+    align-self: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .button {
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    border: 3px solid $vice-blue;
+    min-width: 160px;
+    background-color: $black;
+    color: $vice-blue;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+      font-weight: 900;
+      letter-spacing: 10px;
+      border: 7px solid $vice-blue;
+    }
+  }
+}

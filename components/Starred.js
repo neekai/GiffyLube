@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import StarredItem from './StarredItem'
-import NoResults from './NoResults'
+import EmptyPage from './EmptyPage'
+import { removeFromFavorite } from '../utils/helpers'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
 const Starred = () => {
@@ -16,26 +17,35 @@ const Starred = () => {
   }, [])
 
   const handleUnstar = slug => {
+    removeFromFavorite(slug)
     setStarredGIFs(starredGIFs.filter(gif => Object.keys(gif)[0] !== slug))
   }
 
   const renderStarredItem = () => {
     return (
-      <ResponsiveMasonry>
-        <Masonry>
-          {starredGIFs.map(starredGIF => {
-            return (
-              <StarredItem
-                starredGIF={starredGIF}
-                handleUnstar={handleUnstar}
-              />
-            )
-          })}
-        </Masonry>
-      </ResponsiveMasonry>
+      <>
+        <ResponsiveMasonry>
+          <Masonry>
+            {starredGIFs.map((starredGIF, i) => {
+              return (
+                <StarredItem
+                  starredGIF={starredGIF}
+                  handleUnstar={handleUnstar}
+                  key={i}
+                />
+              )
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
+      </>
     )
   }
-  return <div>{starredGIFs.length ? renderStarredItem() : <NoResults />}</div>
+  return (
+    <>
+      <h1>My Favorites</h1>
+      {starredGIFs.length ? renderStarredItem() : <EmptyPage />}
+    </>
+  )
 }
 
 export default Starred

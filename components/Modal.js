@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { addToFavorite, removeFromFavorite } from '../utils/helpers'
+import {
+  faStar as farStar,
+  faTimesCircle
+} from '@fortawesome/free-regular-svg-icons'
+import { isItemStarred, handleToggleStar } from '../utils/helpers'
 import modalStyles from '../styles/components/Modal.module.scss'
 import imageStyles from '../styles/components/Image.module.scss'
 
@@ -12,25 +15,15 @@ const Modal = ({
   currentlySelectedGIF,
   setCurrentlySelectedGIF
 }) => {
-  const [saved, setSaved] = useState(false)
+  const [starred, setStarred] = useState(false)
 
   const handleCloseModal = () => {
     setCurrentlySelectedGIF(null)
     toggleModal()
   }
 
-  const handleToggleStar = (slug, url) => {
-    if (saved) {
-      setSaved(false)
-      removeFromFavorite(slug)
-    } else {
-      setSaved(true)
-      addToFavorite(slug, url)
-    }
-  }
-
   useEffect(() => {
-    if (sessionStorage.getItem(currentlySelectedGIF.slug)) setSaved(true)
+    if (isItemStarred(currentlySelectedGIF.slug)) setStarred(true)
   }, [])
 
   return (
@@ -41,7 +34,7 @@ const Modal = ({
     >
       <div className={`${modalStyles.modal}`}>
         <span className={modalStyles.close} onClick={handleCloseModal}>
-          X
+          <FontAwesomeIcon icon={faTimesCircle} />
         </span>
         <div className={imageStyles['image-container']}>
           <img
@@ -50,12 +43,14 @@ const Modal = ({
           />
           <div className={imageStyles['image-details']}>
             <FontAwesomeIcon
-              icon={saved ? fasStar : farStar}
+              icon={starred ? fasStar : farStar}
               className={imageStyles.star}
               onClick={() => {
                 handleToggleStar(
                   currentlySelectedGIF.slug,
-                  currentlySelectedGIF.images.original.url
+                  currentlySelectedGIF.images.original.url,
+                  starred,
+                  setStarred
                 )
               }}
             />

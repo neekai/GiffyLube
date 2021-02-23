@@ -15,7 +15,7 @@ const DELAY_VALUES = [
   { name: '3 seconds', value: 3000 },
   { name: '4 seconds', value: 4000 },
   { name: '5 seconds', value: 5000 },
-  { name: 'Clear', value: 0 }
+  { name: 'None', value: 0 }
 ]
 
 const MAX_OFFSET = 4999

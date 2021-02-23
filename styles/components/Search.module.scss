@@ -1,0 +1,28 @@
+@import '../base/abstracts';
+
+.search {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  > * {
+    padding: 1rem;
+    border: none;
+    outline: none;
+  }
+
+  input {
+    width: 90%;
+  }
+
+  button {
+    width: 10%;
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(131, 58, 180, 1) 0%,
+      rgba(219, 62, 177, 1) 100%,
+      rgba(252, 176, 69, 1) 100%
+    );
+    cursor: pointer;
+  }
+}
