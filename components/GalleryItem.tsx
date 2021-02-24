@@ -1,8 +1,32 @@
 import { useRef, useCallback } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import galleryItemStyles from '../styles/components/GalleryItem.module.scss'
-import imageStyles from '../styles/components/Image.module.scss'
+import galleryItemStyles from '@/styles/GalleryItem.module.scss'
+import imageStyles from '@/styles/Image.module.scss'
+
+interface Image {
+  url: string
+  height: number
+  width: number
+}
+
+interface GIF {
+  title: string
+  images: {
+    [key: string]: Image
+  }
+}
+
+interface PageProps {
+  GIF: GIF
+  gifCount: number
+  index: number
+  loading: boolean
+  hasMore: boolean
+  setOffset: (offset: object) => void
+  toggleModal: () => void
+  setCurrentlySelectedGIF: (GIF: object) => void
+}
 
 const GalleryItem = ({
   GIF,
@@ -13,7 +37,7 @@ const GalleryItem = ({
   setOffset,
   toggleModal,
   setCurrentlySelectedGIF
-}) => {
+}: PageProps) => {
   const observer = useRef()
   const lastGIFElementRef = useCallback(
     node => {

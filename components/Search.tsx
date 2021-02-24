@@ -1,13 +1,29 @@
 import { useState, useEffect, useContext } from 'react'
+import AbortController from 'abort-controller'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import AbortController from 'abort-controller'
-import { DelayContext } from '../contexts/DelayContext'
-import { FilterContext } from '../contexts/FilterContext'
-import { SET_SEARCH_VALUE } from '../utils/actions'
-import searchStyles from '../styles/components/Search.module.scss'
+import { DelayContext } from '@/contexts/DelayContext'
+import { FilterContext } from '@/contexts/FilterContext'
+import { SET_SEARCH_VALUE } from '@/utils/actions'
+import searchStyles from '@/styles/Search.module.scss'
 
-const Search = ({ setLoading, apiCall, setResponse, setNoResults }) => {
+interface PageProps {
+  setLoading: (boolean) => void
+  setResponse: (GIF: object) => void
+  setNoResults: (boolean) => void
+  apiCall: (
+    signal: object,
+    delay: number,
+    searchValue: string
+  ) => Promise<object>
+}
+
+const Search = ({
+  setLoading,
+  apiCall,
+  setResponse,
+  setNoResults
+}: PageProps) => {
   const { setFilter } = useContext(FilterContext)
   const {
     delayState: { delay }

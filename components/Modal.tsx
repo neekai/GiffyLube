@@ -5,16 +5,35 @@ import {
   faStar as farStar,
   faTimesCircle
 } from '@fortawesome/free-regular-svg-icons'
-import { isItemStarred, handleToggleStar } from '../utils/helpers'
-import modalStyles from '../styles/components/Modal.module.scss'
-import imageStyles from '../styles/components/Image.module.scss'
+import { isItemStarred, handleToggleStar } from '@/utils/helpers'
+import modalStyles from '@/styles/Modal.module.scss'
+import imageStyles from '@/styles/Image.module.scss'
+
+interface ImageURL {
+  url: string
+}
+
+interface GIF {
+  slug: string
+  title: string
+  images: {
+    [key: string]: ImageURL
+  }
+}
+
+interface PageProps {
+  displayModal: boolean
+  currentlySelectedGIF: GIF
+  toggleModal: () => void
+  setCurrentlySelectedGIF: (GIF: object | null) => void
+}
 
 const Modal = ({
   displayModal,
   toggleModal,
   currentlySelectedGIF,
   setCurrentlySelectedGIF
-}) => {
+}: PageProps) => {
   const [starred, setStarred] = useState(false)
 
   const handleCloseModal = () => {

@@ -1,4 +1,4 @@
-import emptyPageStyles from '../styles/components/EmptyPage.module.scss'
+import emptyPageStyles from '@/styles/EmptyPage.module.scss'
 
 const EmptyPage = () => {
   return (

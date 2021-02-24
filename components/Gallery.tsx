@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FilterContext } from '../contexts/FilterContext'
-import { DelayContext } from '../contexts/DelayContext'
-import useFilterSearch from '../utils/useFilterSearch.js'
-import Modal from './Modal'
-import GalleryItem from './GalleryItem'
-import galleryStyles from '../styles/components/Gallery.module.scss'
+import { FilterContext } from '@/contexts/FilterContext'
+import { DelayContext } from '@/contexts/DelayContext'
+import useFilterSearch from '@/utils/useFilterSearch'
+import Modal from '@/components/Modal'
+import GalleryItem from '@/components/GalleryItem'
+import galleryStyles from '@/styles/Gallery.module.scss'
 
 const Gallery = () => {
   const [offset, setOffset] = useState(0)
@@ -48,23 +48,25 @@ const Gallery = () => {
           setCurrentlySelectedGIF={setCurrentlySelectedGIF}
         />
       )}
-      <ResponsiveMasonry>
-        <Masonry>
-          {GIFs.map((GIF, i) => (
-            <GalleryItem
-              GIF={GIF}
-              key={i}
-              gifCount={GIFs.length}
-              index={i}
-              loading={loading}
-              hasMore={hasMore}
-              setOffset={setOffset}
-              toggleModal={toggleModal}
-              setCurrentlySelectedGIF={setCurrentlySelectedGIF}
-            />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      {GIFs.length && (
+        <ResponsiveMasonry>
+          <Masonry>
+            {GIFs.map((GIF, i) => (
+              <GalleryItem
+                GIF={GIF}
+                key={i}
+                gifCount={GIFs.length}
+                index={i}
+                loading={loading}
+                hasMore={hasMore}
+                setOffset={setOffset}
+                toggleModal={toggleModal}
+                setCurrentlySelectedGIF={setCurrentlySelectedGIF}
+              />
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
       <div className="loading">
         {loading && (
           <FontAwesomeIcon

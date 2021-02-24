@@ -1,10 +1,10 @@
-import Starred from '../components/Starred'
+import Starred from '@/components/Starred'
 
 const favorites = () => {
   return (
-    <div>
+    <main>
       <Starred />
-    </div>
+    </main>
   )
 }
 

@@ -1,12 +1,12 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import Link from 'next/link'
-import { CATEGORIES, DELAY_VALUES } from '../utils/constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faRocket } from '@fortawesome/free-solid-svg-icons'
-import { FilterContext } from '../contexts/FilterContext'
-import { DelayContext } from '../contexts/DelayContext'
-import { SET_CATEGORY, SET_DELAY } from '../utils/actions'
-import navStyles from '../styles/components/Nav.module.scss'
+import { FilterContext } from '@/contexts/FilterContext'
+import { DelayContext } from '@/contexts/DelayContext'
+import { DELAY_VALUES } from '@/utils/constants'
+import { SET_CATEGORY, SET_DELAY } from '@/utils/actions'
+import navStyles from '@/styles/Nav.module.scss'
 
 const Nav = () => {
   const { setFilter } = useContext(FilterContext)
@@ -38,9 +38,7 @@ const Nav = () => {
           <li className={navStyles.delay}>
             Delay
             <div
-              className={`${navStyles['dropdown']} ${
-                navStyles['delay-dropdown']
-              }`}
+              className={`${navStyles['dropdown']} ${navStyles['delay-dropdown']}`}
             >
               {DELAY_VALUES.map((delay, i) => (
                 <div

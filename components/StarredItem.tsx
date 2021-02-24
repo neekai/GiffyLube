@@ -1,8 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import imageStyles from '../styles/components/Image.module.scss'
+import imageStyles from '@/styles/Image.module.scss'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-const starredItem = ({ starredGIF, handleUnstar }) => {
+interface StarredGIF {
+  [key: string]: string
+}
+
+interface PageProps {
+  starredGIF: StarredGIF
+  handleUnstar: (slug: string) => void
+}
+
+const starredItem = ({ starredGIF, handleUnstar }: PageProps) => {
   return (
     <div className={imageStyles['image-container']}>
       <img
