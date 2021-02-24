@@ -2,15 +2,15 @@ import { useState, useEffect, useContext } from 'react'
 import AbortController from 'abort-controller'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { DelayContext } from '@/contexts/DelayContext'
-import { FilterContext } from '@/contexts/FilterContext'
+import { DelayContext } from '../contexts/DelayContext'
+import { FilterContext } from '../contexts/FilterContext'
 import { SET_SEARCH_VALUE } from '@/utils/actions'
 import searchStyles from '@/styles/Search.module.scss'
 
 interface PageProps {
-  setLoading: (boolean) => void
+  setLoading: (value: boolean) => void
   setResponse: (GIF: object) => void
-  setNoResults: (boolean) => void
+  setNoResults: (value: boolean) => void
   apiCall: (
     signal: object,
     delay: number,

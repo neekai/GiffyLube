@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import StarredItem from '@/components/StarredItem'
-import EmptyPage from '@/components/EmptyPage'
+import StarredItem from '../components/StarredItem'
+import EmptyPage from '../components/EmptyPage'
 import { removeFromFavorite } from '@/utils/helpers'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
