@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faRocket } from '@fortawesome/free-solid-svg-icons'
-import { useFilterContext } from '../contexts/FilterContext'
-import { useDelayContext } from '../contexts/DelayContext'
+import { useFilterContext } from '@/contexts/FilterContext'
+import { useDelayContext } from '@/contexts/DelayContext'
 import { DELAY_VALUES } from '@/utils/constants'
 import { SET_CATEGORY, SET_DELAY } from '@/utils/actions'
 import navStyles from '@/styles/Nav.module.scss'
@@ -20,6 +20,7 @@ const Nav = () => {
         <Link href="/">
           <li>
             <FontAwesomeIcon icon={faRocket} className={navStyles.logo} />
+            GiffyLube
           </li>
         </Link>
         <ul>

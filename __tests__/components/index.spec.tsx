@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme'
 import Home from '../../src/pages'
 import Favorites from '../../src/pages/favorites'
-import Main from '../../src/components/Main'
-import Starred from '../../src/components/Starred'
+import Main from '../../src/components/views/Main'
+import Starred from '../../src/components/views/Starred'
 
 describe('Pages', () => {
   describe('Home', () => {

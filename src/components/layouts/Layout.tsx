@@ -1,5 +1,5 @@
-import Header from './Header'
-import Nav from './Nav'
+import Header from '../common/Header'
+import Nav from '../views/Nav'
 import layoutStyles from '@/styles/Layout.module.scss'
 
 interface LayoutProps {

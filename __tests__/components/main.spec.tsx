@@ -3,11 +3,11 @@ import { act } from '@testing-library/react'
 import * as FilterContext from '../../src/contexts/FilterContext'
 import * as DelayContext from '../../src/contexts/DelayContext'
 import * as apiCalls from '../../src/services/getGIFs'
-import Main from '../../src/components/Main'
-import Search from '../../src/components/Search'
-import RandomGIF from '../../src/components/RandomGIF'
-import NoResults from '../../src/components/NoResults'
-import Loading from '../../src/components/Loading'
+import Main from '../../src/components/views/Main'
+import Search from '../../src/components/common/Search'
+import RandomGIF from '../../src/components/views/RandomGIF'
+import NoResults from '../../src/components/common/NoResults'
+import Loading from '../../src/components/common/Loading'
 
 describe('Main', () => {
   beforeAll(() => {

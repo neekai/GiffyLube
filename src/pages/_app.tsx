@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app'
 import FilterContextProvider from '@/contexts/FilterContext'
 import DelayContextProvider from '@/contexts/DelayContext'
-import Layout from '../components/Layout'
+import Layout from '../components/layouts/Layout'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

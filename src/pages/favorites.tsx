@@ -1,4 +1,4 @@
-import Starred from '../components/Starred'
+import Starred from '../components/views/Starred'
 
 const Favorites = () => {
   return (

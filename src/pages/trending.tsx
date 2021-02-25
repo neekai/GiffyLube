@@ -1,4 +1,4 @@
-import Gallery from '../components/Gallery'
+import Gallery from '../components/views/Gallery'
 
 const Trending = () => {
   return (
