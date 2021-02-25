@@ -24,10 +24,6 @@ interface PageProps {
 const RandomGIF = ({ randomGIF }: PageProps) => {
   const [starred, setStarred] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   if (isItemStarred(randomGIF.slug)) setStarred(true)
-  // }, [randomGIF.slug])
-
   return (
     <div
       className={`${imageStyles['image-container']} ${imageStyles['random-image']}`}
