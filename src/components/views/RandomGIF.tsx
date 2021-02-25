@@ -24,9 +24,9 @@ interface PageProps {
 const RandomGIF = ({ randomGIF }: PageProps) => {
   const [starred, setStarred] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (isItemStarred(randomGIF)) setStarred(true)
-  }, [])
+  // useEffect(() => {
+  //   if (isItemStarred(randomGIF.slug)) setStarred(true)
+  // }, [randomGIF.slug])
 
   return (
     <div
@@ -35,7 +35,7 @@ const RandomGIF = ({ randomGIF }: PageProps) => {
       <img src={randomGIF.images.original.url} alt={randomGIF.title} />
       <div className={imageStyles['image-details']}>
         <FontAwesomeIcon
-          icon={starred ? fasStar : farStar}
+          icon={isItemStarred(randomGIF.slug) ? fasStar : farStar}
           className={imageStyles.star}
           onClick={() => {
             handleToggleStar(

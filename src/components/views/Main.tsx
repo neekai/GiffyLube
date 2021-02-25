@@ -29,23 +29,26 @@ const Main = () => {
   const { signal } = controller
 
   const handleClick = async () => {
-    setFilter({ type: SET_SEARCH_VALUE, payload: '' })
-    setNoResults(false)
+    setSearchValue('')
     setLoading(true)
+    setNoResults(false)
+    setFilter({ type: SET_SEARCH_VALUE, payload: '' })
     const GIF = await getRandomGIF(signal, delay)
     setRandomGIF(GIF)
     setLoading(false)
   }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim()
+    const value = e.target.value
     setSearchValue(value)
   }
 
   const handleSearchSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const value = searchValue.trim()
+    if (!value) return
     setLoading(true)
-    const GIF = await getRandomGIF(signal, delay, searchValue)
+    const GIF = await getRandomGIF(signal, delay, value)
     if (Array.isArray(GIF) && GIF.length === 0) {
       setNoResults(true)
     } else {

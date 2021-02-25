@@ -7,6 +7,7 @@ import { useDelayContext } from '@/contexts/DelayContext'
 import useFilterSearch from '@/utils/useFilterSearch'
 import Modal from '../common/Modal'
 import GalleryItem from './GalleryItem'
+import Loading from '../common/Loading'
 import ErrorPage from '../common/ErrorPage'
 import galleryStyles from '@/styles/Gallery.module.scss'
 
@@ -70,16 +71,7 @@ const Gallery = () => {
           </Masonry>
         </ResponsiveMasonry>
       )}
-      <div className="loading">
-        {loading && (
-          <FontAwesomeIcon
-            icon={faSpinner}
-            spin
-            className="loading-icon"
-            size="2x"
-          />
-        )}
-      </div>
+      {loading && <Loading />}
       {error && <ErrorPage />}
     </>
   )
