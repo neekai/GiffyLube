@@ -1,61 +1,18 @@
-import { useState, useEffect, useContext } from 'react'
-import AbortController from 'abort-controller'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { DelayContext } from '../contexts/DelayContext'
-import { FilterContext } from '../contexts/FilterContext'
-import { SET_SEARCH_VALUE } from '@/utils/actions'
 import searchStyles from '@/styles/Search.module.scss'
 
 interface PageProps {
-  setLoading: (value: boolean) => void
-  setResponse: (GIF: object) => void
-  setNoResults: (value: boolean) => void
-  apiCall: (
-    signal: object,
-    delay: number,
-    searchValue: string
-  ) => Promise<object>
+  searchValue: string
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleSearchSubmit: (e: React.FormEvent) => void
 }
 
 const Search = ({
-  setLoading,
-  apiCall,
-  setResponse,
-  setNoResults
+  searchValue,
+  handleSearchChange,
+  handleSearchSubmit
 }: PageProps) => {
-  const { setFilter } = useContext(FilterContext)
-  const {
-    delayState: { delay }
-  } = useContext(DelayContext)
-
-  const [searchValue, setSearchValue] = useState('')
-  const controller = new AbortController()
-  const { signal } = controller
-
-  const handleSearchChange = e => {
-    const value = e.target.value.trim()
-    setSearchValue(value)
-  }
-
-  const handleSearchSubmit = async e => {
-    e.preventDefault()
-    setLoading(true)
-    setFilter({ type: SET_SEARCH_VALUE, payload: searchValue })
-    const GIF = await apiCall(signal, delay, searchValue)
-    if (Array.isArray(GIF) && GIF.length === 0) {
-      setNoResults(true)
-    } else {
-      setNoResults(false)
-      setResponse(GIF)
-    }
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    return () => controller.abort()
-  }, [])
-
   return (
     <form className={searchStyles.search} onSubmit={handleSearchSubmit}>
       <input

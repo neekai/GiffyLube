@@ -5,18 +5,18 @@ import { removeFromFavorite } from '@/utils/helpers'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
 const Starred = () => {
-  const [starredGIFs, setStarredGIFs] = useState([])
+  const [starredGIFs, setStarredGIFs] = useState<Array<object>>([])
   useEffect(() => {
-    const starredGIFsArr = []
+    const starredGIFsArr: Array<object> = []
     Object.keys(sessionStorage).map(slug => {
-      const info = {}
+      const info: any = {}
       info[slug] = sessionStorage.getItem(slug)
       starredGIFsArr.push(info)
     })
     setStarredGIFs(starredGIFsArr)
   }, [])
 
-  const handleUnstar = slug => {
+  const handleUnstar = (slug: string) => {
     removeFromFavorite(slug)
     setStarredGIFs(starredGIFs.filter(gif => Object.keys(gif)[0] !== slug))
   }

@@ -22,7 +22,7 @@ interface PageProps {
 }
 
 const RandomGIF = ({ randomGIF }: PageProps) => {
-  const [starred, setStarred] = useState(false)
+  const [starred, setStarred] = useState<boolean>(false)
 
   useEffect(() => {
     if (isItemStarred(randomGIF)) setStarred(true)

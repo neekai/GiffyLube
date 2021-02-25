@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import AbortController from 'abort-controller'
-import { DelayContext } from '../contexts/DelayContext'
-import { FilterContext } from '../contexts/FilterContext'
+import { useDelayContext } from '../contexts/DelayContext'
+import { useFilterContext } from '../contexts/FilterContext'
 import { getRandomGIF } from '../services/getGIFs'
 import { SET_SEARCH_VALUE, SET_CATEGORY } from '@/utils/actions'
 import Search from './Search'
@@ -16,22 +16,43 @@ const Main = () => {
   const {
     setFilter,
     filterState: { query }
-  } = useContext(FilterContext)
+  } = useFilterContext()
   const {
     delayState: { delay }
-  } = useContext(DelayContext)
-  const [randomGIF, setRandomGIF] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [noResults, setNoResults] = useState(false)
+  } = useDelayContext()
+
+  const [randomGIF, setRandomGIF] = useState<any>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [noResults, setNoResults] = useState<boolean>(false)
+  const [searchValue, setSearchValue] = useState<string>('')
   const controller = new AbortController()
   const { signal } = controller
 
-  const handleGetRandomGIF = async () => {
+  const handleClick = async () => {
     setFilter({ type: SET_SEARCH_VALUE, payload: '' })
     setNoResults(false)
     setLoading(true)
     const GIF = await getRandomGIF(signal, delay)
     setRandomGIF(GIF)
+    setLoading(false)
+  }
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim()
+    setSearchValue(value)
+  }
+
+  const handleSearchSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    const GIF = await getRandomGIF(signal, delay, searchValue)
+    if (Array.isArray(GIF) && GIF.length === 0) {
+      setNoResults(true)
+    } else {
+      setNoResults(false)
+      setRandomGIF(GIF)
+    }
+    setFilter({ type: SET_SEARCH_VALUE, payload: searchValue })
     setLoading(false)
   }
 
@@ -43,7 +64,7 @@ const Main = () => {
       setLoading(false)
     }
     fetchRandomGIF()
-  }, [])
+  }, [delay])
 
   useEffect(() => {
     setFilter({ type: SET_SEARCH_VALUE, payload: '' })
@@ -58,22 +79,24 @@ const Main = () => {
 
   return (
     <div>
-      {randomGIF && (
+      {randomGIF ? (
         <section className={mainStyles['container']}>
           <div className={mainStyles['header']}>
             <h1>#{query || 'random'}</h1>
             <p>A GIF a Day Keeps the Doctor Away </p>
           </div>
           <Search
-            setLoading={setLoading}
-            apiCall={getRandomGIF}
-            setResponse={setRandomGIF}
-            setNoResults={setNoResults}
-            signal={signal}
+            searchValue={searchValue}
+            handleSearchChange={handleSearchChange}
+            handleSearchSubmit={handleSearchSubmit}
           />
-          {noResults ? <NoResults /> : <RandomGIF randomGIF={randomGIF} />}
+          {noResults ? (
+            <NoResults query={query} />
+          ) : (
+            <RandomGIF randomGIF={randomGIF} />
+          )}
           <button
-            onClick={handleGetRandomGIF}
+            onClick={handleClick}
             disabled={loading}
             className={mainStyles.button}
           >
@@ -84,8 +107,9 @@ const Main = () => {
             )}
           </button>
         </section>
+      ) : (
+        <Loading />
       )}
-      {loading && !randomGIF && <Loading />}
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imageStyles from '@/styles/Image.module.scss'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-interface StarredGIF {
+type StarredGIF = {
   [key: string]: string
 }
 

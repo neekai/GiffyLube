@@ -1,11 +1,10 @@
-import { useContext } from 'react'
-import { FilterContext } from '../contexts/FilterContext'
 import noResultsStyles from '@/styles/NoResults.module.scss'
 
-const NoResults = () => {
-  const {
-    filterState: { query }
-  } = useContext(FilterContext)
+interface PageProps {
+  query: string
+}
+
+const NoResults = ({ query }: PageProps) => {
   return (
     <div className={noResultsStyles.container}>
       <h2>No GIFs found for: {query}</h2>

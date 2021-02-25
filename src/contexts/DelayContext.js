@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { SET_DELAY } from '../utils/actions'
 
 const initialState = { delay: 0 }
@@ -15,7 +15,9 @@ const reducer = (state, { type, payload }) => {
   }
 }
 
-export const DelayContext = createContext()
+const DelayContext = createContext()
+
+export const useDelayContext = () => useContext(DelayContext)
 
 const DelayContextProvider = ({ children }) => {
   const [delay, dispatch] = useReducer(reducer, initialState)

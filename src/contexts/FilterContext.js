@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { SET_CATEGORY, SET_SEARCH_VALUE } from '../utils/actions'
 
 const initialState = { category: 'trending', query: '' }
@@ -21,7 +21,9 @@ const reducer = (state, { type, payload }) => {
   }
 }
 
-export const FilterContext = createContext()
+const FilterContext = createContext()
+
+export const useFilterContext = () => useContext(FilterContext)
 
 const FilterContextProvider = ({ children }) => {
   const [filter, dispatch] = useReducer(reducer, initialState)

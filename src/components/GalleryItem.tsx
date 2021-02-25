@@ -12,6 +12,7 @@ interface Image {
 
 interface GIF {
   title: string
+  slug: string
   images: {
     [key: string]: Image
   }
@@ -23,7 +24,7 @@ interface PageProps {
   index: number
   loading: boolean
   hasMore: boolean
-  setOffset: (offset: object) => void
+  setOffset: (setState: (offset: number) => number) => void
   toggleModal: () => void
   setCurrentlySelectedGIF: (GIF: object) => void
 }
@@ -45,7 +46,7 @@ const GalleryItem = ({
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && hasMore) {
-          setOffset(prevOffset => prevOffset + 20)
+          setOffset((prevOffset: number) => prevOffset + 20)
         }
       })
       if (node) observer.current.observe(node)
@@ -53,7 +54,7 @@ const GalleryItem = ({
     [loading, hasMore]
   )
 
-  const handleClickGIF = GIF => {
+  const handleClickGIF = (GIF: object) => {
     setCurrentlySelectedGIF(GIF)
     toggleModal()
   }

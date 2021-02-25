@@ -1,25 +1,28 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FilterContext } from '../contexts/FilterContext'
-import { DelayContext } from '../contexts/DelayContext'
+import { useFilterContext } from '../contexts/FilterContext'
+import { useDelayContext } from '../contexts/DelayContext'
 import useFilterSearch from '@/utils/useFilterSearch'
 import Modal from '../components/Modal'
 import GalleryItem from '../components/GalleryItem'
+import ErrorPage from '../components/ErrorPage'
 import galleryStyles from '@/styles/Gallery.module.scss'
 
 const Gallery = () => {
-  const [offset, setOffset] = useState(0)
-  const [displayModal, setDisplayModal] = useState(false)
-  const [currentlySelectedGIF, setCurrentlySelectedGIF] = useState(null)
+  const [offset, setOffset] = useState<number>(0)
+  const [displayModal, setDisplayModal] = useState<boolean>(false)
+  const [currentlySelectedGIF, setCurrentlySelectedGIF] = useState<
+    object | null
+  >(null)
 
   const {
     filterState: { category }
-  } = useContext(FilterContext)
+  } = useFilterContext()
   const {
     delayState: { delay }
-  } = useContext(DelayContext)
+  } = useDelayContext()
   const { GIFs, hasMore, loading, error } = useFilterSearch(
     category,
     offset,
@@ -77,7 +80,7 @@ const Gallery = () => {
           />
         )}
       </div>
-      <div className="error">{error && <h1>Error</h1>}</div>
+      {error && <ErrorPage />}
     </>
   )
 }

@@ -1,20 +1,18 @@
-import { useContext } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faRocket } from '@fortawesome/free-solid-svg-icons'
-import { FilterContext } from '../contexts/FilterContext'
-import { DelayContext } from '../contexts/DelayContext'
+import { useFilterContext } from '../contexts/FilterContext'
+import { useDelayContext } from '../contexts/DelayContext'
 import { DELAY_VALUES } from '@/utils/constants'
 import { SET_CATEGORY, SET_DELAY } from '@/utils/actions'
 import navStyles from '@/styles/Nav.module.scss'
 
 const Nav = () => {
-  const { setFilter } = useContext(FilterContext)
-
+  const { setFilter } = useFilterContext()
   const {
     delayState: { delay: delayStateValue },
     setDelay
-  } = useContext(DelayContext)
+  } = useDelayContext()
 
   return (
     <div className={navStyles.container}>

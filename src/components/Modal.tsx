@@ -34,7 +34,7 @@ const Modal = ({
   currentlySelectedGIF,
   setCurrentlySelectedGIF
 }: PageProps) => {
-  const [starred, setStarred] = useState(false)
+  const [starred, setStarred] = useState<boolean>(false)
 
   const handleCloseModal = () => {
     setCurrentlySelectedGIF(null)
